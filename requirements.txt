@@ -28,10 +28,6 @@ cffi==1.14.0
 chardet==3.0.4
 click==7.1.2
 colorama==0.4.3
-conda==4.8.3
-conda-build==3.18.11
-conda-package-handling==1.7.0
-conda-verify==3.4.2
 cryptography==2.9.2
 cycler==0.10.0
 cymem==2.0.3
