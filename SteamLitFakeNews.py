@@ -13,9 +13,10 @@ import streamlit as st
 import pandas as pd
 
 import spacy
-import io
 import time
 from PIL import Image
+
+from io import StringIO 
 
 def load_model():
     #declare global variables
@@ -54,18 +55,25 @@ def run():
         if st.button("Predict"):
             output = predict(text1)
             output = str(output[0])  # since its a list, get the 1st item
-            st.success(f"The news item is {output}")        
+            st.success(f"The news item is {output}")     
+            st.balloons()   
     elif add_selectbox == "Txt file":        
         output = ""
-        file_buffer = st.file_uploader("Upload text file for new item", type=["txt"])
+        file_buffer = st.file_uploader("Upload text file for new item", type=["txt"])           
         if st.button("Predict"):
-            text_news = file_buffer.read()
+            text_news = file_buffer.read()  
+            
+            # in the latest stream-lit version ie. 68, we need to explicitly convert bytes to text
+            st_version = st.__version__  # eg 0.67.0
+            versions = st_version.split('.')           
+            if int(versions[1]) > 67:
+                text_news = text_news.decode('utf-8')
+            
             print(text_news)
             output = predict(text_news)
             output = str(output[0])
-            st.success(f"The news item is {output}")
-      
-    st.balloons()    
+            st.success(f"The news item is {output}")      
+            st.balloons()    
               
     val_path = "data/val.csv"     
     df = st.cache(pd.read_csv)(val_path)    
