@@ -20,10 +20,13 @@ from io import StringIO
 
 def load_model():
     #declare global variables
+	print("Inside load_model")
     global nlp
     global textcat        
     nlp = spacy.load('models/fakenews')
+	print("model loaded")
     textcat = nlp.get_pipe('textcat')
+	print("Got pipe textcat")
 
 
 def predict(news):
@@ -40,6 +43,7 @@ def predict(news):
 
 
 def run():
+    print("Inside run")
     st.sidebar.info('You can either enter the news item online in the textbox or upload a txt file')    
     st.set_option('deprecation.showfileUploaderEncoding', False)       
     add_selectbox = st.sidebar.selectbox("How would you like to predict?", ("Online", "Txt file"))    
@@ -74,9 +78,11 @@ def run():
             output = str(output[0])
             st.success(f"The news item is {output}")      
             st.balloons()    
-              
+        
+    print("reading csv filee")		
     val_path = "data/val.csv"     
-    df = st.cache(pd.read_csv)(val_path)    
+    df = st.cache(pd.read_csv)(val_path)
+    print("read csv file")    
     is_check = st.checkbox("Display validation data")
     if is_check:
         my_bar = st.progress(0)
@@ -90,5 +96,6 @@ def run():
     
     
 if __name__ == "__main__":
+    print("Inside code")
     load_model()
     run()
