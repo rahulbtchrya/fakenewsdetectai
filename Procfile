@@ -1,1 +1,1 @@
-web: streamlit run "SteamLitFakeNews.py"
+web: streamlit run SteamLitFakeNews.py
