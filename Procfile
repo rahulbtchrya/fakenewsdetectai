@@ -1,1 +1,1 @@
-web: streamlit run SteamLitFakeNews.py
+web: sh setup.sh && streamlit run SteamLitFakeNews.py
